@@ -16,12 +16,12 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "FormAirport" */ '../views/AddAirportView.vue')
+    component: () => import(/* webpackChunkName: "FormAirport" */ '../views/FormAirportView.vue')
   },
   {
     path: '/airport/update/:id',
     name: 'UpdateAirportView',
-    component: () => import(/* webpackChunkName: "FormAirport" */ '../views/AddAirportView.vue')
+    component: () => import(/* webpackChunkName: "FormAirport" */ '../views/FormAirportView.vue')
   }
 ];
 
