@@ -69,7 +69,7 @@ export default {
     },
     updateAirport: async ({ commit }, newAirport) => {
       try {
-        await commit('UPDATE_AIRPORT', newAirport);
+        await commit('SET_AIRPORT', newAirport);
       }
       catch(error) {
         console.log(error);

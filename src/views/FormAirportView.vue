@@ -281,7 +281,7 @@ export default {
       this.isEditForm = true;
       this.$store.getters.getAirportById(this.$route.params.id)
         .then(airport => {
-          this.form = airport;
+          this.form = {...airport};
           this.title = `Update ${this.form.name}`;
         });
     }
