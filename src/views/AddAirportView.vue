@@ -18,7 +18,7 @@
     >
       <h3 class="text-left">Airport</h3>
       <div class="row my-2">
-        <div class="col-sm-12 col-xl-5">
+        <div class="col-sm-12 col-xl-4">
           <div class="form-group text-left">
             <label for="iata-field">Name</label>
             <input
@@ -277,22 +277,17 @@ export default {
     }
   },
   created () {
-    console.log('Created');
-    this.$store.dispatch('loadData')
-      .then(() => {
-        console.log('after');
-        if (this.$route.params.id) {
-          this.isEditForm = true;
-          this.$store.getters.getAirportById(this.$route.params.id)
-            .then(airport => {
-              this.form = airport;
-              this.title = `Update ${this.form.name}`;
-            });
-        }
-        else {
-          this.title = "Add new airport";
-        }
-      })
+    if (this.$route.params.id) {
+      this.isEditForm = true;
+      this.$store.getters.getAirportById(this.$route.params.id)
+        .then(airport => {
+          this.form = airport;
+          this.title = `Update ${this.form.name}`;
+        });
+    }
+    else {
+      this.title = "Add new airport";
+    }
   },
   methods: {
     getTimezones() {
@@ -333,6 +328,7 @@ export default {
         ...this.fieldErrors,
         [e.target.name]: e.target.validationMessage
       };
+      document.getElementsByTagName('body')[0].scrollIntoView({ behavior: 'smooth' })
     },
   }
 }

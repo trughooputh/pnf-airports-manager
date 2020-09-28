@@ -26,7 +26,6 @@ export default {
     },
     SET_AIRPORT: (state, payload) => {
       const index = state.airports.findIndex((airport) => airport.id === payload.id)
-      console.log('index:', index);
       state.airports.splice(index, 1, payload);
     },
     REMOVE_AIRPORT: (state, payload) => {
@@ -61,7 +60,6 @@ export default {
         try {
           const lastElement = state.airports.reduce((prev, current) => current.id > prev.id ? current : prev);
           newAirport.id = lastElement.id + 1;
-          console.log('newAirport FULL', newAirport);
           await commit('ADD_AIRPORT', newAirport)
         }
         catch(error) {

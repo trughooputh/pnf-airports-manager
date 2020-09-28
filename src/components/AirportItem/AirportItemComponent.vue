@@ -38,12 +38,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  methods: {
-    selectAirport(airport) {
-      console.log(airport);
-      this.$store.dispatch('selectedAirport', airport);
-    }
   }
 };
 </script>

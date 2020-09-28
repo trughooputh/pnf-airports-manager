@@ -47,11 +47,9 @@ export default {
   },
   methods: {
     deleteAirport(airport) {
-      const confirmdelete = confirm(`Are you sure to remove "${airport.name}" from the list?`);
-      if (confirmdelete == true) {
-        this.$store.dispatch('removeAirport', airport.id).then(() => {
-          console.log(airport.name, ' has been deleted');
-        })
+      const confirmDelete = confirm(`Are you sure to remove "${airport.name}" from the list?`);
+      if (confirmDelete == true) {
+        this.$store.dispatch('removeAirport', airport.id);
       }
     },
     getAirportURLMaps(airport) {

@@ -39,18 +39,9 @@ export default {
       nbItems: 25
     }
   },
-  created () {
-    console.log('search', this.search);
-    console.log((this.limit, this.limit + 10));
-  },
   computed: {
     AirportFiltered() {
       return this.$store.getters.getFilteredAirports(this.search).slice(this.limit, this.limit + this.nbItems);
-    }
-  },
-  methods: {
-    selectAirport(airport) {
-      console.log(airport);
     }
   }
 }

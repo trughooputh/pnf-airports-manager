@@ -22,7 +22,13 @@ export default {
   components: {
     CustomMenu,
     CustomFooter,
-  }
+  },
+  created () {
+    console.log('App created', this.$route);
+    this.$store.dispatch('loadData').then(() => {
+      console.log('Data loaded!');
+    })
+  },
 }
 </script>
 
