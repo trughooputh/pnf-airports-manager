@@ -44,9 +44,8 @@
               class="form-control"
               maxlength="3"
               placeholder="---"
-              pattern="^[a-zA-Z_]{1,3}$"
+              pattern="^[A-Z_]{3}$"
               required="true"
-              :disabled="NeedIATA"
               :class="{ 'is-invalid':  IsExistingIata || fieldErrors.iata }"
             >
             <small v-if="IsExistingIata" class="form-text text-muted">IATA already existing</small>
@@ -63,6 +62,7 @@
             maxlength="4"
             class="form-control"
             placeholder="ICAO"
+            pattern="^[A-Z_]{4}$"
             required="true"
             :class="{ 'is-invalid': fieldErrors.icao }"
           >
@@ -105,7 +105,7 @@
         </div>
       </div>
       <div class="row my-2">
-        <div class="col-4">
+        <div class="col-2">
           <div class="form-group text-left">
             <label for="iata-field">Altitude</label>
             <input
@@ -124,6 +124,46 @@
         </div>
         <div class="col-2">
           <div class="form-group text-left">
+            <label for="iata-field">DST</label>
+            <input
+              type="text"
+              name="DST"
+              v-model="form.DST"
+              class="form-control"
+              placeholder="U"
+              pattern="^[a-zA-Z_]{1,2}$"
+              maxlength="2"
+              required="true"
+              :class="{ 'is-invalid': fieldErrors.DST }"
+            >
+            <small v-if="fieldErrors.DST" class="form-text text-muted">{{ fieldErrors.DST }}</small>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xl-4">
+          <div class="form-group text-left">
+            <label for="iata-field">TZ</label>
+            <select 
+              class="form-control"
+              v-model="form.tz"
+              name="tz"
+              required="true"
+              :class="{ 'is-invalid': fieldErrors.tz }"
+            >
+              <option value="">Select a timezone</option>
+              <option
+                v-for="(tz, index) in getTimezones()"
+                :value="index"
+                :key="`tz-${index}`"
+                :selected="form.tz === index"
+              >
+                {{ index }} {{ tz }}
+              </option>
+            </select>
+            <small v-if="fieldErrors.tz" class="form-text text-muted">{{ fieldErrors.tz }}</small>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group text-left">
             <label for="iata-field">Timezone</label>
             <input
               type="text"
@@ -137,21 +177,6 @@
               :class="{ 'is-invalid': fieldErrors.timezone }"
             >
             <small v-if="fieldErrors.timezone" class="form-text text-muted">{{ fieldErrors.timezone }}</small>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group text-left">
-            <label for="iata-field">TZ</label>
-            <input
-              type="text"
-              name="tz"
-              v-model="form.tz"
-              class="form-control"
-              placeholder="TZ"
-              required="true"
-              :class="{ 'is-invalid': fieldErrors.tz }"
-            >
-            <small v-if="fieldErrors.tz" class="form-text text-muted">{{ fieldErrors.tz }}</small>
           </div>
         </div>
       </div>
@@ -249,9 +274,6 @@ export default {
   computed: {
     IsExistingIata() {
       return this.$store.getters.isIataExisiting(this.form.iata) && !this.isEditForm
-    },
-    NeedIATA() {
-      return this.isEditForm && !this.form.iata
     }
   },
   created () {
@@ -273,6 +295,9 @@ export default {
       })
   },
   methods: {
+    getTimezones() {
+      return this.$store.state.timezones;
+    },
     handleSubmit(e) {
       e.preventDefault();
       if (this.$refs.form.checkValidity() && !this.IsExistingIata) {

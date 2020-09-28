@@ -57,7 +57,7 @@ export default {
     right: 1.2rem;
   }
   &__Action {
-    width: 80%;
+    width: 100%;
   }
 }
 </style>

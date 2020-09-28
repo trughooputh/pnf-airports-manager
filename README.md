@@ -25,4 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 Timezones from: 
-https://raw.githubusercontent.com/dmfilipenko/timezones.json/master/timezones.json
+https://github.com/sanohin

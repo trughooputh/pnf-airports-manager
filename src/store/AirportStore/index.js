@@ -40,7 +40,7 @@ export default {
       await setTimeout(() => {
         dispatch('loadAirports');
         dispatch('loadTimezones');
-      }, 5000);
+      }, 200);
     },
     loadAirports: ({ state, commit }) => {
       if (state.airports.length === 0) {
